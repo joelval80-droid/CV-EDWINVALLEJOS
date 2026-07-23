@@ -365,11 +365,14 @@ body {
 
 }
 
-.flip-card:hover .flip-card-inner,
+/* PC */
+.flip-card:hover .flip-card-inner{
+    transform: rotateY(180deg);
+}
+
+/* Celular */
 .flip-card.active .flip-card-inner{
-
-    transform:rotateY(180deg);
-
+    transform: rotateY(180deg);
 }
 
 .flip-front,
@@ -1089,6 +1092,36 @@ document.querySelectorAll(".card").forEach(card=>{
         },200);
 
     });
+
+});
+
+const isTouch = window.matchMedia("(hover: none)").matches;
+
+document.querySelectorAll(".flip-card").forEach(card=>{
+
+    if(isTouch){
+
+        card.addEventListener("click",function(e){
+
+            e.preventDefault();
+
+            const abierta=this.classList.contains("active");
+
+            document.querySelectorAll(".flip-card").forEach(c=>{
+
+                c.classList.remove("active");
+
+            });
+
+            if(!abierta){
+
+                this.classList.add("active");
+
+            }
+
+        });
+
+    }
 
 });
 
